@@ -1,0 +1,215 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Belly;
+            /**
+            this css makes sure that the app takes the entire screen and that the font is applied to everything.
+            *{
+                
+            }
+            is a universal selector;
+            
+            **/
+        }
+@font-face {
+
+            font-family:Belly;
+            src: url(../../Belly.ttf)
+               /**
+            
+            this css imports a font yo be used in your code
+            **/
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            /**
+            please learn css flex box you'll understand it better by practicing
+           
+            **/
+
+
+        }
+        .display {
+            height: 40%;
+            padding: 10px;
+            width: 100%;
+
+            font-size: 35px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            position: relative;
+            background: #121212;
+        }
+        .display:after {
+            content: "";
+            width: 50px;
+            height: 1px;
+            padding: 2px;
+            background: rgba(255,255,255,0.3);
+             /**
+            
+            lemme explain this
+rgba() is used to make a color the fourth value is the opacity of the color the lower the number the higher the opacity and vice versa.
+
+            **/
+            position: absolute;
+            bottom: 2px;
+            align-self: center;
+            border-radius: 2px;
+        }
+        .display:before {
+            content: "";
+            height: 50px;
+            width: 1px;
+            padding: 1px;
+            background: #01bc62;
+            position: absolute;
+            top: 3px;
+            right: 2px;
+            align-self: center;
+            border-radius: 2px;
+            animation: blink 1s ease infinite;
+
+        }
+@keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+            /**
+            @keyframes is used to manipulate css properties to be used as animations...can you see that animation name blink is addecti the top display css?
+            
+            **/
+        }
+        .keys {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: #252525;
+
+        }
+        .first-col,.second-col,.third-col,.fourth-col {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        input {
+
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            font-size: 27px;
+            color: #fff;
+            transition: .3s ease;
+        }
+        input:hover {
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: .3s ease;
+
+        }
+        .first-col input:first-child,
+        .second-col input:first-child,
+        .third-col input:first-child,
+        .fourth-col input:first-child {
+            color: #01bc62;
+        }
+        .fourth-col input {
+
+            color: #01bc62;
+        }
+        .fourth-col input:last-child {
+            height: 30%;
+            background: #01bc62;
+            color: #fff;
+            width: 50px;
+            border-radius: 8px;
+            font-size: 50px;
+        }
+        #cancel {
+            padding: 0;
+
+            width: 40px;
+            font-size: 16px;
+
+
+        }
+
+        .ans {
+            max-width: 100%!important;
+                        /**
+            
+            the !important will force the browser to use max-width value .
+            **/
+            flex: 2;
+            word-break: break;
+            align-self: flex-end;
+            overflow-x: scroll;
+        }
+
+        .final_ans {
+
+            max-width: 100%!important;
+            display: flex;
+
+            flex: 1;
+            justify-content: flex-end;
+            align-items: center;
+            transition: .3s ease-in-out;
+
+        }
+
+        .scale {
+            animation: scale 0.3s 1;
+        }
+@keyframes scale {
+            0% {
+                font-size: 35px;
+            }
+            50% {
+                font-size: 50px;
+
+            }
+            100% {
+                font-size: 35px;
+            }
+
+        }
+        .away {
+            animation: away .3s 1;
+        }
+@keyframes away {
+            to {
+                font-size: 50px;
+                opacity: 0;
+
+            }
+        }
+        .moveup {
+
+         
+            transform: translateY(-30px);
+             
+
+        }

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+    
+    <!---
+    
+    
+    
+    AUTHOR : BRYAN GODSON DANQUAH.
+    WEBSITE : BRYANMEDIA.SITE.
+    THIS IS A PROPERTY OF BRYAN MEDIA AND ITS GOID FOR LEARNING PURPOSE AND NOT REPRODUCTION.
+    THE ORIGINAL APP MAY BE UNDER COPYRIGHT LAW.
+    -->
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css" media="all">
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Belly;
+            /**
+            this css makes sure that the app takes the entire screen and that the font is applied to everything.
+            *{
+                
+            }
+            is a universal selector;
+            
+            **/
+        }
+@font-face {
+
+            font-family:Belly;
+            src: url(../../Belly.ttf)
+               /**
+            
+            this css imports a font yo be used in your code
+            **/
+        }
+
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            /**
+            please learn css flex box you'll understand it better by practicing
+           
+            **/
+
+
+        }
+        .display {
+            height: 40%;
+            padding: 10px;
+            width: 100%;
+
+            font-size: 35px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            position: relative;
+            background: #121212;
+        }
+        .display:after {
+            content: "";
+            width: 50px;
+            height: 1px;
+            padding: 2px;
+            background: rgba(255,255,255,0.3);
+             /**
+            
+            lemme explain this
+rgba() is used to make a color the fourth value is the opacity of the color the lower the number the higher the opacity and vice versa.
+
+            **/
+            position: absolute;
+            bottom: 2px;
+            align-self: center;
+            border-radius: 2px;
+        }
+        .display:before {
+            content: "";
+            height: 50px;
+            width: 1px;
+            padding: 1px;
+            background: #01bc62;
+            position: absolute;
+            top: 3px;
+            right: 2px;
+            align-self: center;
+            border-radius: 2px;
+            animation: blink 1s ease infinite;
+
+        }
+@keyframes blink {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+            /**
+            @keyframes is used to manipulate css properties to be used as animations...can you see that animation name blink is addecti the top display css?
+            
+            **/
+        }
+        .keys {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: #252525;
+
+        }
+        .first-col,.second-col,.third-col,.fourth-col {
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+        input {
+
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            font-size: 27px;
+            color: #fff;
+            transition: .3s ease;
+        }
+        input:hover {
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: .3s ease;
+
+        }
+        .first-col input:first-child,
+        .second-col input:first-child,
+        .third-col input:first-child,
+        .fourth-col input:first-child {
+            color: #01bc62;
+        }
+        .fourth-col input {
+
+            color: #01bc62;
+        }
+        .fourth-col input:last-child {
+            height: 30%;
+            background: #01bc62;
+            color: #fff;
+            width: 50px;
+            border-radius: 8px;
+            font-size: 50px;
+        }
+        #cancel {
+            padding: 0;
+
+            width: 40px;
+            font-size: 16px;
+
+
+        }
+
+        .ans {
+            max-width: 100%!important;
+                        /**
+            
+            the !important will force the browser to use max-width value .
+            **/
+            flex: 2;
+            word-break: break;
+            align-self: flex-end;
+            overflow-x: scroll;
+        }
+
+        .final_ans {
+
+            max-width: 100%!important;
+            display: flex;
+
+            flex: 1;
+            justify-content: flex-end;
+            align-items: center;
+            transition: .3s ease-in-out;
+
+        }
+
+        .scale {
+            animation: scale 0.3s 1;
+        }
+@keyframes scale {
+            0% {
+                font-size: 35px;
+            }
+            50% {
+                font-size: 50px;
+
+            }
+            100% {
+                font-size: 35px;
+            }
+
+        }
+        .away {
+            animation: away .3s 1;
+        }
+@keyframes away {
+            to {
+                font-size: 50px;
+                opacity: 0;
+
+            }
+        }
+        .moveup {
+
+         
+            transform: translateY(-30px);
+             
+
+        }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="display">
+
+            <section class="ans">
+            </section>
+
+
+            <section class="final_ans">
+            </section>
+
+        </div>
+        <section class="keys" draggable="true">
+            <div class="first-col">
+                <input type="button" name="" id="c" value="C" onclick="DeleteAll()" />
+                <input type="button" name="" id="" value="7" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="4"onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="1" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="√"onclick="root()" />
+
+            </div>
+            <div class="second-col">
+                <input type="button" name="" id="" value="÷" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="8" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="5" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="2" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="0" onclick="Add(this.value)" />
+            </div>
+            <div class="third-col">
+                <input type="button" name="" id="" value="x" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="9" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="6" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="3" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="•"onclick="Add(this.value)" />
+
+            </div>
+            <div class="fourth-col">
+                <input type="button" name="" id="cancel" value="DEL" onclick="Delete()" />
+                <input type="button" name="" id="" value="-" onclick="Add(this.value)" />
+                <input type="button" name="" id="" value="+" onclick="Add(this.value)" />
+                <input type="button" name="" id="eq" value="=" onclick="away()" />
+
+            </div>
+        </section>
+    </div>
+    <script>
+        
+                        /*
+            
+            selecting the element with class ans...do that I can work with it later I named the selected element display . it can be anything sensible for it's purpose.
+            */
+        let display = document.querySelector(".ans");
+
+        let final_ans = document.querySelector(".final_ans");
+
+        function Add(x) {
+            /*
+            the Add Function is responsible for displaying the pressed button .
+            x is the parameter passed in the element...
+            I passed this .value in all the inputs...
+            this.value will get the value of the current input pressed.
+            */
+            final_ans.classList.remove("moveup");
+            
+         /*
+          
+          the eval() Function in JavaScript does not recognize ÷ as division but rather this /.
+          so I'm checking that if the value passed to parameter x in the input as this.value is revision sign then I'll assign a new value to x ... which JavaScript knows to be / .
+          please note that 2 == are comparing one = is assigning. the same thing happens to " and • note that • is not a dot. this is a dot . I used • because it is begger and it appears in the center of the button."
+         */
+            if (x == "÷") {
+                x = "/"
+            }
+            if (x == "x") {
+                x = "*"
+            }
+            if (x == "•") {
+                x = "."
+            }
+            display.innerText += x;
+            display.scrollBy(20, 0);
+            /*
+            hmmm this will be hard to explain ... when you move up you'll understand the purpose of for loops in js.
+            
+            */
+  var operands = ["*", "+","-","/"];
+            for (i = 0; i < operands.length; i++) {
+                if (display.innerText.includes(operands[i]) && display.innerText.endsWith("1") || display.innerText.endsWith("2") || display.innerText.endsWith("3") || display.innerText.endsWith("4") || display.innerText.endsWith("5") || display.innerText.endsWith("6") || display.innerText.endsWith("7") || display.innerText.endsWith("8") || display.innerText.endsWith("9") && display.innerText.length != 1) {
+                    calculate();
+
+                }
+            }
+
+
+        }
+
+        function Delete() {
+            display.innerText = display.innerText.slice(0, -1);
+
+
+        }
+
+        function DeleteAll() {
+            display.innerText = "";
+            final_ans.innerText = ""
+        }
+
+        function calculate() {
+            /*
+            try {
+                
+            }catch{
+            
+            
+            }
+            is a syntax for checking errors it avoids your app from crashing.
+            I think these are what you should know for now.
+            */
+            try {
+                let dis = document.querySelector(".ans");
+
+                let and = eval(dis.innerText);
+                final_ans.innerText = and;
+
+                final_ans.style.color = "cornflowerblue";
+                
+                
+
+            }
+            catch(er) {
+                final_ans.innerText = er;
+                final_ans.style.color = "#CF4B36";
+                
+            }
+        }
+        function away() {
+
+
+            display.classList.add("away");
+            display.onanimationend = ()=> {
+                display.classList.remove("away");
+                display.innerText = "";
+
+
+            }
+            final_ans.classList.add("moveup");
+
+
+
+        }
+
+
+        function root() {
+
+            let sq = Math.sqrt(display.innerText);
+            final_ans.innerText = sq;
+
+        }
+    </script>
+
+</body>
+</html>
